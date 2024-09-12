@@ -1,16 +1,16 @@
 // pages/reset-password.tsx
 "use client"
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useSearchParams, useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { apiPost } from '@/helpers/axiosRequest'
 
 export default function ResetPasswordPage() {
   const router = useRouter()
-  const { token } = router.query
-  const [password, setPassword] = useState('')
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
+  
   const [confirmPassword, setConfirmPassword] = useState('')
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     if (!password || !confirmPassword) {
